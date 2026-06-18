@@ -7,12 +7,12 @@ export default defineConfig({
   integrations: [
     sveltiaCms({
       config: {
-        // backend: {
-        //   name: "github",
-        //   repo: "oddevan/madcrasher-astro",
-        //   branch: "main",
-        // },
-        backend: { name: "test-repo" },
+        backend: {
+          name: "github",
+          repo: "oddevan/madcrasher-astro",
+          branch: "main",
+        },
+        // backend: { name: "test-repo" },
         media_folder: "src/images",
         collections: [
           {

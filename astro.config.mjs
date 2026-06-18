@@ -4,33 +4,52 @@ import { defineConfig } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
-	integrations: [
-		sveltiaCms({
+  integrations: [
+    sveltiaCms({
       config: {
-        backend: {
-          name: "github",
-          repo: "oddevan/madcrasher-astro",
-          branch: "main",
-        },
+        // backend: {
+        //   name: "github",
+        //   repo: "oddevan/madcrasher-astro",
+        //   branch: "main",
+        // },
+        backend: { name: "test-repo" },
         media_folder: "src/images",
         collections: [
           {
             name: "albums",
+            label: "Albums",
+            label_singular: "Album",
             folder: "src/albums",
             fields: [
-              { name: "title", widget: "string" },
-              { name: "draft", widget: "boolean", required: false },
-              { name: "date", widget: "datetime" },
-							{ name: "cover", widget: "image" },
-              { name: "body", widget: "markdown" },
-							{ name: "links", widget: "list", fields: [
-								{ name: "label", widget: "string" },
-								{ name: "url", widget: "url" },
-							]},
+              { name: "title", label: "Title", widget: "string" },
+              { name: "date", label: "Release Date", widget: "datetime" },
+              { name: "cover", label: "Cover", widget: "image" },
+              { name: "body", label: "Writeup", widget: "markdown" },
+              {
+                name: "links",
+                label: "Available at",
+                widget: "list",
+                min: 1,
+                fields: [
+                  {
+                    name: "key",
+                    widget: "select",
+                    options: [
+                      { label: "Apple Music", value: "apple" },
+                      { label: "Spotify", value: "spotify" },
+                      { label: "YouTube", value: "youtube" },
+                      { label: "Deezer", value: "deezer" },
+                      { label: "Amazon", value: "amazon" },
+                      { label: "Bandcamp", value: "bandcamp" },
+                    ],
+                  },
+                  { name: "url", widget: "string", type: "url" },
+                ],
+              },
             ],
           },
         ],
       },
-		})
-	]
+    }),
+  ],
 });
